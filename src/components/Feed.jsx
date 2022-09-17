@@ -29,19 +29,9 @@ const Feed = () => {
 				py={1}
 				sx={{
 					flex: 2,
-					overflowY: "auto",
-					height: "90vh",
 					backgroundColor: "#181818",
 				}}
 			>
-				<Typography
-					variant="h5"
-					fontWeight="bold"
-					sx={{ color: "white", mb: 2, mt: 1 }}
-				>
-					{selectedCategory}{" "}
-					<span style={{ color: "#e01000" }}>Videos</span>
-				</Typography>
 				<Videos url={"search"} selectedCategory={selectedCategory} />
 			</Box>
 		</Stack>
