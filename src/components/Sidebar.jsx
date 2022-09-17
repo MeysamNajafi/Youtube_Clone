@@ -8,8 +8,6 @@ const Sidebar = ({ selectedCategory, selectCategoryHandler }) => {
 		<Stack
 			direction="row"
 			sx={{
-				height: { sx: "auto", md: "92%" },
-				overflowY: "auto",
 				flexDirection: { md: "column" },
 			}}
 		>

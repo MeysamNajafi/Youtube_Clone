@@ -9,7 +9,7 @@ let nextPageToken = "";
 let throttleTimer;
 let previousSelectedCategory = "";
 
-const Videos = ({ url, selectedCategory }) => {
+const Videos = ({ url, selectedCategory, searchQuery }) => {
 	const [videos, setVideos] = useState([]);
 	const [isFetching, setIsFetching] = useState(false);
 	const containerRef = useRef();
@@ -18,9 +18,9 @@ const Videos = ({ url, selectedCategory }) => {
 		try {
 			let URL = "";
 			if (nextPageToken && previousSelectedCategory === selectedCategory)
-				URL = `${url}?part=snippet&q=${selectedCategory}&pageToken=${nextPageToken}&maxResults=48`;
+				URL = `${url}?part=snippet&${searchQuery}=${selectedCategory}&pageToken=${nextPageToken}&maxResults=48`;
 			else
-				URL = `${url}?part=snippet&q=${selectedCategory}&maxResults=40`;
+				URL = `${url}?part=snippet&${searchQuery}=${selectedCategory}&maxResults=48`;
 
 			setIsFetching(true);
 			const data = await fetchFromApi(URL);

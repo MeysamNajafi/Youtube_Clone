@@ -6,25 +6,6 @@ import { demoProfilePicture } from "../utils/consts";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
-function TabPanel(props) {
-	const { children, value, index, ...other } = props;
-
-	return (
-		<div
-			role="tabpanel"
-			hidden={value !== index}
-			id={`simple-tabpanel-${index}`}
-			aria-labelledby={`simple-tab-${index}`}
-			{...other}
-		>
-			{value === index && (
-				<Box sx={{ p: 3 }}>
-					<Typography>{children}</Typography>
-				</Box>
-			)}
-		</div>
-	);
-}
 function a11yProps(index) {
 	return {
 		id: `simple-tab-${index}`,
@@ -34,11 +15,18 @@ function a11yProps(index) {
 const DEFAULT_BANNER =
 	"https://yt3.ggpht.com/kvYtOOlIxxS5m5nZ7d3EVznB86-hmUlCq-0s_TJHt1uS8eehxj-wEV1aU6vQcFtiQoPAqdQ-";
 
-const ChannelHeader = ({ bannerImage, profileImage, title, subscribers }) => {
+const ChannelHeader = ({
+	bannerImage,
+	profileImage,
+	title,
+	subscribers,
+	onChangeTab,
+}) => {
 	const [tab, setTab] = React.useState(0);
 
 	const handleChange = (_, newValue) => {
 		setTab(+newValue);
+		onChangeTab(newValue);
 	};
 
 	return (
@@ -125,12 +113,6 @@ const ChannelHeader = ({ bannerImage, profileImage, title, subscribers }) => {
 					</Box>
 				</Container>
 			</Box>
-			<TabPanel value={tab} index={0}>
-				Videos
-			</TabPanel>
-			<TabPanel value={tab} index={1}>
-				About
-			</TabPanel>
 		</Stack>
 	);
 };

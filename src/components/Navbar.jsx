@@ -13,11 +13,13 @@ const Navbar = () => {
 			direction="row"
 			p={2}
 			sx={{
-				// position: "sticky",
+				position: "sticky",
 				background: "#212121",
-				// top: 0,
+				top: 0,
 				justifyContent: "space-between",
 				borderBottom: "1px solid #333",
+				height: "50px",
+				zIndex: 1000,
 			}}
 		>
 			<Link to="/" style={{ display: "flex", alignItems: "center" }}>

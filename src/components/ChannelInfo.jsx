@@ -1,19 +1,16 @@
-import { Stack, Box, Typography } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchFromApi } from "../utils/fetch";
-import { Sidebar, ChannelHeader } from "./";
+import { ChannelHeader, Videos } from "./";
 
-const DEFAULT_BANNER =
-	"https://yt3.ggpht.com/kvYtOOlIxxS5m5nZ7d3EVznB86-hmUlCq-0s_TJHt1uS8eehxj-wEV1aU6vQcFtiQoPAqdQ-";
-
-const ChannelInfo = () => {
-	const [selectedCategory, setSelectedCategory] = useState("New");
+const ChannelInfo = ({ selectedCategory }) => {
 	const { channelId } = useParams();
 	const [isFetching, setIsFetching] = useState(false);
 	const [channelInfo, setChannelInfo] = useState([]);
+	const [tab, setTab] = useState(0);
 
 	useEffect(() => {
 		const runner = async () => {
@@ -29,48 +26,42 @@ const ChannelInfo = () => {
 		if (channelId) runner();
 	}, [channelId]);
 
+	const changeTabHandler = (t) => {
+		setTab(t);
+	};
+
 	return (
-		<Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
-			<Box
-				sx={{
-					height: { sx: "auto", md: "92vh" },
-					px: { sx: 0, md: 2 },
-					backgroundColor: "#212121",
-				}}
-			>
-				<Sidebar
-					selectedCategory={selectedCategory}
-					selectCategoryHandler={setSelectedCategory}
+		<Box
+			sx={{
+				flex: 2,
+				backgroundColor: "#0f0f0f",
+			}}
+		>
+			<Stack direction="column">
+				<ChannelHeader
+					bannerImage={
+						channelInfo?.brandingSettings?.image?.bannerExternalUrl
+					}
+					profileImage={channelInfo?.snippet?.thumbnails?.high?.url}
+					title={channelInfo?.snippet?.title}
+					subscribers={
+						channelInfo?.statistics?.hiddenSubscriberCount
+							? "hidden"
+							: channelInfo?.statistics?.subscriberCount
+					}
+					onChangeTab={changeTabHandler}
 				/>
-				<Typography variant="body2" color="white" mt={2}>
-					Copyright 2022 Meysam Najafi
-				</Typography>
-			</Box>
-			<Box
-				sx={{
-					flex: 2,
-					backgroundColor: "#0f0f0f",
-				}}
-			>
-				<div>
-					<ChannelHeader
-						bannerImage={
-							channelInfo?.brandingSettings?.image
-								?.bannerExternalUrl
-						}
-						profileImage={
-							channelInfo?.snippet?.thumbnails?.high?.url
-						}
-						title={channelInfo?.snippet?.title}
-						subscribers={
-							channelInfo?.statistics?.hiddenSubscriberCount
-								? "hidden"
-								: channelInfo?.statistics?.subscriberCount
-						}
+			</Stack>
+			{tab === 0 && (
+				<Box p={3}>
+					<Videos
+						url="search"
+						searchQuery="channelId"
+						selectedCategory={channelId}
 					/>
-				</div>
-			</Box>
-		</Stack>
+				</Box>
+			)}
+		</Box>
 	);
 };
 
