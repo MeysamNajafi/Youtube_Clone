@@ -2,8 +2,19 @@ import React from "react";
 import { Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { Sidebar, Videos } from "./";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
-const MainLayout = ({ selectedCategory, selectCategoryHandler, children }) => {
+const MainLayout = ({ children }) => {
+	const [selectedCategory, setSelectedCategory] = useState("New");
+	const [searchParams, setSearchParams] = useSearchParams();
+	const selectedCategoryFromParam = searchParams.get("category");
+
+	useEffect(() => {
+		setSelectedCategory(selectedCategoryFromParam);
+	}, [selectedCategoryFromParam]);
+
 	return (
 		<Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
 			<Box
@@ -21,7 +32,7 @@ const MainLayout = ({ selectedCategory, selectCategoryHandler, children }) => {
 			>
 				<Sidebar
 					selectedCategory={selectedCategory}
-					selectCategoryHandler={selectCategoryHandler}
+					selectCategoryHandler={setSelectedCategory}
 				/>
 				<Typography variant="body2" color="white" my={2}>
 					Copyright 2022 Meysam Najafi

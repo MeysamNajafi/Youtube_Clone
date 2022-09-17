@@ -1,9 +1,11 @@
 import { Stack } from "@mui/system";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import { categories } from "../utils/consts";
 
 const Sidebar = ({ selectedCategory, selectCategoryHandler }) => {
+	const navigate = useNavigate();
 	return (
 		<Stack
 			direction="row"
@@ -14,6 +16,10 @@ const Sidebar = ({ selectedCategory, selectCategoryHandler }) => {
 			{categories.map((category, i) => (
 				<button
 					onClick={() => {
+						navigate({
+							pathname: "/",
+							search: "?category=" + category.name,
+						});
 						selectCategoryHandler(category.name);
 					}}
 					key={i}

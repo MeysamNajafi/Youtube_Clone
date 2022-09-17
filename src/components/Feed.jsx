@@ -1,8 +1,17 @@
 import { Box } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Videos } from "./";
+import { useSearchParams } from "react-router-dom";
 
-const Feed = ({ selectedCategory }) => {
+const Feed = () => {
+	const [selectedCategory, setSelectedCategory] = useState("New");
+	const [searchParams, setSearchParams] = useSearchParams();
+	const selectedCategoryFromParam = searchParams.get("category");
+
+	useEffect(() => {
+		setSelectedCategory(selectedCategoryFromParam);
+	}, [selectedCategoryFromParam]);
+
 	return (
 		<Box
 			px={2}

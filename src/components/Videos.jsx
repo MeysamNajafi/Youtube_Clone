@@ -84,18 +84,22 @@ const Videos = ({ url, selectedCategory, searchQuery }) => {
 		>
 			<Stack direction="row" flexWrap="wrap" gap={2}>
 				{videos.map((item, i) => (
-					<Box
-						sx={{
-							flex: {
-								md: "1 0 300px",
-								lg: "1 0 250px",
-							},
-						}}
-						key={i}
-					>
-						{item.id.videoId && <VideoCard video={item} />}
-						{/* {item.id.channelId && <ChannelCard channel={item} />} */}
-					</Box>
+					<>
+						{item?.id?.videoId && (
+							<Box
+								sx={{
+									flex: {
+										md: "1 0 300px",
+										lg: "1 0 250px",
+									},
+								}}
+								key={i}
+							>
+								<VideoCard video={item} />
+								{/* {item.id.channelId && <ChannelCard channel={item} />} */}
+							</Box>
+						)}
+					</>
 				))}
 			</Stack>
 			{isFetching && (

@@ -1,12 +1,10 @@
 import { Box } from "@mui/material";
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Navbar, VideoDetail, ChannelInfo, Search, Feed } from "./components";
 import MainLayout from "./components/MainLayout";
 
 function App() {
-	const [selectedCategory, setSelectedCategory] = useState("New");
 	return (
 		<BrowserRouter>
 			<Box sx={{ backgroundColor: "#000" }}>
@@ -16,11 +14,8 @@ function App() {
 						path="/"
 						exact
 						element={
-							<MainLayout
-								selectedCategory={selectedCategory}
-								selectCategoryHandler={setSelectedCategory}
-							>
-								<Feed selectedCategory={selectedCategory} />
+							<MainLayout>
+								<Feed />
 							</MainLayout>
 						}
 					></Route>
@@ -31,13 +26,8 @@ function App() {
 					<Route
 						path="/channel/:channelId"
 						element={
-							<MainLayout
-								selectedCategory={selectedCategory}
-								selectCategoryHandler={setSelectedCategory}
-							>
-								<ChannelInfo
-									selectedCategory={selectedCategory}
-								/>
+							<MainLayout>
+								<ChannelInfo />
 							</MainLayout>
 						}
 					></Route>
