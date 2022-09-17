@@ -13,7 +13,7 @@ const MainLayout = ({ selectedCategory, selectCategoryHandler, children }) => {
 					boxSizing: "border-box",
 					backgroundColor: "#212121",
 					position: "fixed",
-					top: "78px",
+					top: "83px",
 					zIndex: 1000,
 					overflowY: "auto",
 					width: "230px",

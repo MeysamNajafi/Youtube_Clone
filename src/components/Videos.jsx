@@ -1,6 +1,6 @@
 import { Box, Stack } from "@mui/system";
 import React, { useEffect, useRef, useState } from "react";
-import { VideoCard, ChannelCard } from "./";
+import { VideoCard, ChannelCard, ErrorToast } from "./";
 import { fetchFromApi } from "../utils/fetch";
 import { useCallback } from "react";
 import { CircularProgress } from "@mui/material";
@@ -11,6 +11,8 @@ let previousSelectedCategory = "";
 
 const Videos = ({ url, selectedCategory, searchQuery }) => {
 	const [videos, setVideos] = useState([]);
+	const [isOpen, setIsOpen] = useState(false);
+	const [error, setError] = useState("");
 	const [isFetching, setIsFetching] = useState(false);
 	const containerRef = useRef();
 
@@ -37,7 +39,8 @@ const Videos = ({ url, selectedCategory, searchQuery }) => {
 			nextPageToken = data.nextPageToken;
 			previousSelectedCategory = selectedCategory;
 		} catch (err) {
-			console.log(err);
+			setError(err.message);
+			setIsOpen(true);
 		} finally {
 			setIsFetching(false);
 		}
@@ -91,7 +94,7 @@ const Videos = ({ url, selectedCategory, searchQuery }) => {
 						key={i}
 					>
 						{item.id.videoId && <VideoCard video={item} />}
-						{item.id.channelId && <ChannelCard channel={item} />}
+						{/* {item.id.channelId && <ChannelCard channel={item} />} */}
 					</Box>
 				))}
 			</Stack>
@@ -107,6 +110,13 @@ const Videos = ({ url, selectedCategory, searchQuery }) => {
 					<CircularProgress color="error" />
 				</div>
 			)}
+			<ErrorToast
+				open={isOpen}
+				error={error}
+				closeHandler={() => {
+					setIsOpen((o) => !o);
+				}}
+			/>
 		</div>
 	);
 };

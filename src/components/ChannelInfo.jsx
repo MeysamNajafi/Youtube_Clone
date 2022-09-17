@@ -4,23 +4,26 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchFromApi } from "../utils/fetch";
-import { ChannelHeader, Videos } from "./";
+import { ChannelHeader, Videos, ErrorToast } from "./";
 
-const ChannelInfo = ({ selectedCategory }) => {
+const ChannelInfo = () => {
 	const { channelId } = useParams();
-	const [isFetching, setIsFetching] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
+	const [error, setError] = useState("");
 	const [channelInfo, setChannelInfo] = useState([]);
 	const [tab, setTab] = useState(0);
 
 	useEffect(() => {
 		const runner = async () => {
-			setIsFetching(true);
-			const data = await fetchFromApi(
-				`channels?id=${channelId}&part=part=snippet%2Cstatistics`
-			);
-			console.log(data);
-			setIsFetching(false);
-			setChannelInfo(data.items[0]);
+			try {
+				const data = await fetchFromApi(
+					`channels?id=${channelId}&part=part=snippet%2Cstatistics`
+				);
+				setChannelInfo(data.items[0]);
+			} catch (err) {
+				setError(err.message);
+				setIsOpen(true);
+			}
 		};
 
 		if (channelId) runner();
@@ -61,6 +64,13 @@ const ChannelInfo = ({ selectedCategory }) => {
 					/>
 				</Box>
 			)}
+			<ErrorToast
+				open={isOpen}
+				error={error}
+				closeHandler={() => {
+					setIsOpen((o) => !o);
+				}}
+			/>
 		</Box>
 	);
 };

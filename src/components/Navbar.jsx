@@ -18,8 +18,9 @@ const Navbar = () => {
 				top: 0,
 				justifyContent: "space-between",
 				borderBottom: "1px solid #333",
-				height: "50px",
+				height: "83px",
 				zIndex: 1000,
+				boxSizing: "border-box",
 			}}
 		>
 			<Link to="/" style={{ display: "flex", alignItems: "center" }}>
