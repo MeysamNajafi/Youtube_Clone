@@ -42,6 +42,8 @@ const MainLayout = ({ children }) => {
 				sx={{
 					width: "calc(100% - 230px)",
 					marginLeft: "230px",
+					height: "calc(100vh - 83px)",
+					backgroundColor: "#181818",
 				}}
 			>
 				{children}

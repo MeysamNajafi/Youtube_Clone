@@ -10,3 +10,4 @@ export { default as VideoCard } from "./VideoCard";
 export { default as ChannelCard } from "./ChannelCard";
 export { default as ChannelHeader } from "./ChannelHeader";
 export { default as ErrorToast } from "./ErrorToast";
+export { default as Profile } from "./Profile";

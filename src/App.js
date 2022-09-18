@@ -1,7 +1,14 @@
 import { Box } from "@mui/material";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { Navbar, VideoDetail, ChannelInfo, Search, Feed } from "./components";
+import {
+	Navbar,
+	VideoDetail,
+	ChannelInfo,
+	Search,
+	Feed,
+	Profile,
+} from "./components";
 import MainLayout from "./components/MainLayout";
 
 function App() {
@@ -22,6 +29,14 @@ function App() {
 					<Route
 						path="/video/:videoId"
 						element={<VideoDetail />}
+					></Route>
+					<Route
+						path="/profile"
+						element={
+							<MainLayout>
+								<Profile />
+							</MainLayout>
+						}
 					></Route>
 					<Route
 						path="/channel/:channelId"

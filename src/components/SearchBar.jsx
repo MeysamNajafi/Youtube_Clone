@@ -1,14 +1,18 @@
 import { Search } from "@mui/icons-material";
 import { IconButton, Paper } from "@mui/material";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
-const SearchBar = () => {
-	const submitFormHandler = () => {};
+const SearchBar = ({ onSubmit }) => {
+	const inputRef = useRef();
+	const submitFormHandler = (e) => {
+		e.preventDefault();
+		onSubmit(inputRef.current.value);
+	};
 
 	return (
 		<Paper
-			component="for"
+			component="form"
 			onSubmit={submitFormHandler}
 			sx={{
 				borderRadius: 20,
@@ -23,6 +27,7 @@ const SearchBar = () => {
 				style={{ backgroundColor: "#181818", color: "white" }}
 				className="search-bar"
 				placeholder="search..."
+				ref={inputRef}
 			/>
 			<IconButton type="submit" sx={{ color: "#e01000", p: "10px" }}>
 				<Search />

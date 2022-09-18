@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Stack } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { logo } from "../utils/consts";
-
 import { SearchBar } from "./index";
+import { demoProfilePicture } from "../utils/consts";
+import { NotificationsNone } from "@mui/icons-material";
 
 const Navbar = () => {
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const getSearchInputValue = (val) => {
+		setSearchParams({ category: val });
+	};
+
 	return (
 		<Stack
 			alignItems="center"
@@ -26,8 +33,27 @@ const Navbar = () => {
 			<Link to="/" style={{ display: "flex", alignItems: "center" }}>
 				<img src={logo} width="45" alt="Logo" />
 			</Link>
-			<SearchBar />
-			<div></div>
+			<SearchBar onSubmit={getSearchInputValue} />
+			<Stack direction="row" gap={2} alignItems="center">
+				<button
+					style={{
+						outline: "none",
+						border: "none",
+						cursor: "pointer",
+						background: "transparent",
+					}}
+				>
+					<NotificationsNone sx={{ color: "white", fontSize: 30 }} />
+				</button>
+				<Link to="/profile">
+					<img
+						src={demoProfilePicture}
+						width={30}
+						height={30}
+						style={{ borderRadius: "50%" }}
+					/>
+				</Link>
+			</Stack>
 		</Stack>
 	);
 };

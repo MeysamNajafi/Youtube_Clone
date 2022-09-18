@@ -25,6 +25,10 @@ const Videos = ({ url, selectedCategory, searchQuery }) => {
 				URL = `${url}?part=snippet&${searchQuery}=${selectedCategory}&maxResults=48`;
 
 			setIsFetching(true);
+			if (previousSelectedCategory !== selectedCategory) {
+				setVideos([]);
+			}
+
 			const data = await fetchFromApi(URL);
 			if (previousSelectedCategory === selectedCategory)
 				setVideos((prev) => [...prev, ...data.items]);
