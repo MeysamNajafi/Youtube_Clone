@@ -19,7 +19,6 @@ const SearchBar = ({ onSubmit }) => {
 				border: "1px solid #404040",
 				pl: 2,
 				boxShadow: "none",
-				mr: { sm: 5 },
 				backgroundColor: "#181818",
 			}}
 		>

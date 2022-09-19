@@ -18,11 +18,11 @@ const Navbar = () => {
 		<Stack
 			alignItems="center"
 			direction="row"
-			p={2}
+			p={{ xs: 1, sm: 2 }}
 			sx={{
 				position: "sticky",
 				background: "#212121",
-				top: 0,
+				top: -1,
 				justifyContent: "space-between",
 				borderBottom: "1px solid #333",
 				height: "83px",
@@ -31,10 +31,15 @@ const Navbar = () => {
 			}}
 		>
 			<Link to="/" style={{ display: "flex", alignItems: "center" }}>
-				<img src={logo} width="45" alt="Logo" />
+				<img src={logo} width="40" alt="Logo" />
 			</Link>
 			<SearchBar onSubmit={getSearchInputValue} />
-			<Stack direction="row" gap={2} alignItems="center">
+			<Stack
+				sx={{ display: { xs: "none", sm: "flex" } }}
+				direction="row"
+				gap={2}
+				alignItems="center"
+			>
 				<button
 					style={{
 						outline: "none",
