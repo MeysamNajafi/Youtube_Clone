@@ -12,6 +12,7 @@ import {
 import MainLayout from "./components/MainLayout";
 
 function App() {
+	document.title = "Youtube";
 	return (
 		<BrowserRouter>
 			<Box sx={{ backgroundColor: "#000" }}>
