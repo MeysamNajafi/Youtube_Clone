@@ -93,6 +93,7 @@ const Videos = ({ url, selectedCategory, searchQuery }) => {
 							<Box
 								sx={{
 									flex: {
+										xs: "1 0 200px",
 										md: "1 0 300px",
 										lg: "1 0 250px",
 									},

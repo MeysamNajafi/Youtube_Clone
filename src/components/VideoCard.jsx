@@ -30,7 +30,7 @@ const VideoCard = ({ video: { id: videoId, snippet } }) => {
 				sx={{
 					backgroundColor: "#181818",
 					height: "125px",
-					padding: "12.5px 2px",
+					padding: "12.5px 2px !important",
 				}}
 			>
 				<Link

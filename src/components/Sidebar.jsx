@@ -18,7 +18,7 @@ const Sidebar = ({ selectedCategory, selectCategoryHandler }) => {
 					onClick={() => {
 						navigate({
 							pathname: "/",
-							search: "?category=" + category.name,
+							search: "category=" + category.name,
 						});
 						selectCategoryHandler(category.name);
 					}}
